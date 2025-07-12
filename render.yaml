@@ -2,7 +2,6 @@ services:
   - type: web
     name: lexiforge-backend
     env: node
-    region: oregon
     plan: starter
     buildCommand: cd backend && npm install
     startCommand: cd backend && npm start
@@ -17,25 +16,16 @@ services:
         sync: false
       - key: STRIPE_PUBLISHABLE_KEY
         sync: false
-      - key: CORS_ORIGIN
-        fromService:
-          type: web
-          name: lexiforge-frontend
-          property: url
     autoDeploy: true
 
   - type: web
     name: lexiforge-frontend
     env: static
-    region: oregon
     plan: starter
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/build
     envVars:
       - key: REACT_APP_API_URL
-        fromService:
-          type: web
-          name: lexiforge-backend
-          property: url
+        value: https://lexiforge-backend.onrender.com
     autoDeploy: true
 
