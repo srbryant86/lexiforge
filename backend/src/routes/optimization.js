@@ -111,7 +111,7 @@ Provide:
 Format as a comprehensive optimization report.`;
 
     const response = await axios.post(CLAUDE_API_URL, {
-      model: 'claude-3-sonnet-20240229',
+      model: 'claude-3-5-sonnet-20241022',
       max_tokens: 2000,
       messages: [{
         role: 'user',
@@ -119,9 +119,9 @@ Format as a comprehensive optimization report.`;
       }]
     }, {
       headers: {
-        'Authorization': `Bearer ${CLAUDE_API_KEY}`,
+        'x-api-key': CLAUDE_API_KEY,
         'Content-Type': 'application/json',
-        'x-api-key': CLAUDE_API_KEY
+        'anthropic-version': '2023-06-01'
       }
     });
 
